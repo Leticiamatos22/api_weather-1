@@ -1,16 +1,9 @@
+# models.py
 from django.db import models
 
-class WeatherEntity:
+class WeatherData(models.Model):
+    city_name = models.CharField(max_length=100)
+    temperature = models.FloatField()
 
-    def __init__(self, temperature, date,
-                 city='', atmosphericPressure='',
-                 humidity='', weather='') -> None:
-        self.temperature = temperature
-        self.city = city
-        self.atmosphericPressure = atmosphericPressure
-        self.humidity = humidity
-        self.weather = weather
-        self.date = date
-
-    def __str__(self) -> str:
-        return (f"Weather <{self.temperature}>")
+    def __str__(self):
+        return f"{self.city_name} - {self.temperature}°C"

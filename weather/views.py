@@ -1,28 +1,12 @@
-from datetime import datetime
-from random import randrange
-from django.views import View
-from django.shortcuts import render, redirect
-from .models import WeatherEntity
-from .repositories import WeatherRepository
+# views.py
+from rest_framework import generics
+from .models import WeatherData
+from .serializers import WeatherDataSerializer
 
-class WeatherView(View):
-    def get(self, request):
-        repository = WeatherRepository(collectionName='weathers')
-        weathers = repository.getAll()
-        return render(request, "home.html", {"weathers":weathers})
-    
+class WeatherDataListCreate(generics.ListCreateAPIView):
+    queryset = WeatherData.objects.all()
+    serializer_class = WeatherDataSerializer
 
-class WeatherGenerate(View):
-    def get(self, request):
-        repository = WeatherRepository(collectionName='weathers')
-        # wheater = WeatherEntity(
-        #     temperature=randrange(start=17, stop=40),
-        #     date=datetime.now()
-        # )
-        wheater = {
-            "temperature" : 28,
-            "date": "hoje"
-            }
-        repository.insert(wheater)
-
-        return redirect('Weather View')
+class WeatherDataRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = WeatherData.objects.all()
+    serializer_class = WeatherDataSerializer

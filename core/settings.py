@@ -79,9 +79,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
   'default': {
-      'ENGINE': 'django.db.backends.sqlite3',
-      'NAME': BASE_DIR / 'db.sqlite3',
-      }
+      'ENGINE': 'djongo',
+      'NAME': 'clima-bd',
+      'ENFORCE_SCHEMA': False,
+      'CLIENT': {
+        'host': 'localhost',
+        'port': 27017,
+        'authSource': 'admin',
+      }  
+    }
 }
 
 

@@ -1,7 +1,8 @@
+# urls.py
 from django.urls import path
-from weather.views import WeatherView, WeatherGenerate
+from weather.views import WeatherDataListCreate, WeatherDataRetrieveUpdateDestroy
 
 urlpatterns = [
-    path('', WeatherView.as_view(), name='Weather View'),
-    path('generate', WeatherGenerate.as_view(), name='Weather Generate'),
+    path('weather/', WeatherDataListCreate.as_view(), name='weather-list-create'),
+    path('weather/<int:pk>/', WeatherDataRetrieveUpdateDestroy.as_view(), name='weather-detail'),
 ]
